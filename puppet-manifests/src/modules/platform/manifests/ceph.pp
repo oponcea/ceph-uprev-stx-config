@@ -93,13 +93,8 @@ class platform::ceph
       -> ceph_config {
         "mon.${mon_0_host}/host":      value => $mon_0_host;
         "mon.${mon_0_host}/mon_addr":  value => $mon_0_addr;
-      }
-      if $mon_1_host {
-        Class['::ceph']
-        -> ceph_config {
-          "mon.${mon_1_host}/host":      value => $mon_1_host;
-          "mon.${mon_1_host}/mon_addr":  value => $mon_1_addr;
-        }
+        "mon.${mon_1_host}/host":      value => $mon_1_host;
+        "mon.${mon_1_host}/mon_addr":  value => $mon_1_addr;
       }
       if $mon_2_host {
         Class['::ceph']
@@ -516,7 +511,7 @@ class platform::ceph::runtime_base {
   if str2bool($::is_controller_active) {
     Ceph::Mon <| |>
     -> exec { '/etc/init.d/mgr-restful-plugin start':
-      command   => '/etc/init.d/mgr-restful-plugin start',
+      command   => 'echo now-it-is-not-ready-to-run-mgr-restful-plugin-yet',
       logoutput => true,
     }
   }
