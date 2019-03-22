@@ -61,8 +61,9 @@ data:
     set -ex
 
     # Make sure the pool exists.
-    ceph osd pool stats $POOL_NAME || ceph osd pool create $POOL_NAME $POOL_CHUNK_SIZE || ceph osd pool application enable $POOL_NAME rbd 
+    ceph osd pool stats $POOL_NAME || ceph osd pool create $POOL_NAME $POOL_CHUNK_SIZE
     # Set pool configuration.
+    ceph osd pool application enable $POOL_NAME rbd 
     ceph osd pool set $POOL_NAME size $POOL_REPLICATION
     ceph osd pool set $POOL_NAME crush_rule $POOL_CRUSH_RULE_NAME
 
