@@ -516,7 +516,7 @@ class platform::ceph::runtime_base {
   if str2bool($::is_controller_active) {
     Ceph::Mon <| |>
     -> exec { '/etc/init.d/mgr-restful-plugin start':
-      command   => 'echo now-it-is-not-ready-to-run-mgr-restful-plugin-yet',
+      command   => '/etc/init.d/mgr-restful-plugin start',
       logoutput => true,
     }
   }
